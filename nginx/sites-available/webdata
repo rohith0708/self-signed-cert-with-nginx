@@ -1,0 +1,11 @@
+server {
+ listen 443 ssl;
+ server_name static.rohith.local static1.rohith.local mystatic.rohith.local bad.rohith.local;
+
+ ssl_certificate /etc/ssl/Server.crt;
+ ssl_certificate_key /etc/ssl/private/Server.key;
+
+ root /webdata;
+ index index.html;
+ include /etc/nginx/mime.types;
+}

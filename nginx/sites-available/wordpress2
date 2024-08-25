@@ -1,0 +1,29 @@
+server {
+    listen 443 ssl;
+    server_name wp2.rohith.com;
+  
+    ssl_certificate /etc/ssl/wordpr.crt;
+    ssl_certificate_key /etc/ssl/private/wordpress.key;
+
+
+
+  
+    root /webdata/wordpress2;
+  
+    index index.php index.html;
+
+    location / {
+        try_files $uri $uri/ /index.php?$args;
+    }
+
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/var/run/php/php8.1-fpm.sock;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        include fastcgi_params;
+    }
+
+    location ~ /\.ht {
+        deny all;
+    }
+}             
